@@ -1,0 +1,25 @@
+For the given user input message perform multi-layer encryption using the example codes given below for Base64 and AES encryption techniques in series such that the Base64 encoded message output is passed as input for AES encoding.
+
+reference code:
+#For the message "Hello friends!"
+#Base64 plus AES encoding:
+import base64
+import hashlib
+from Crypto.Cipher import AES
+
+mymessage = "Hello friends!"
+key = "mysecretkey12345"
+
+def enc(message):
+  message = base64.b64encode(message.encode())
+  iv = hashlib.sha256(key.encode()).digest()[:16]
+  aes = AES.new(key.encode(), AES.MODE_CBC, iv)
+  length = 16 - (len(message) % 16)
+  message += bytes([length])*length
+  encrypted_message = aes.encrypt(message)
+  #print("Encrypted message:",encrypted_message)
+  return encrypted_message
+
+enc(mymessage)
+
+user input message: 

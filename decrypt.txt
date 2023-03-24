@@ -1,0 +1,25 @@
+Give a code to decrypt the given ciphertext using the multi-layer encryption technique performed using base64 and AES encryption techniques. The ciphertext is obtained by passing the input message through a series of Base64 and AES encodings. The example codes for Base64 and AES encryption techniques are provided below. Use this key "mysecretkey12345" and initialization vector (IV) as "iv = hashlib.sha256(key.encode()).digest()[:16]".And also keep the name of the function same(dec).
+The arguments required for the functions should be of the same name as below.
+
+Code:
+import base64
+import hashlib
+from Crypto.Cipher import AES
+
+def dec(encrypted_message, key):
+  print('dec')
+  iv = hashlib.sha256(key.encode()).digest()[:16]
+  aes = AES.new(key.encode(), AES.MODE_CBC, iv)
+  decrypted_message = aes.decrypt(encrypted_message)
+  padding_length = decrypted_message[-1]
+  decrypted_message = decrypted_message[:-padding_length]
+  print(decrypted_message)
+  message = base64.b64decode(decrypted_message).decode()
+  return message
+
+key = "mysecretkey12345"
+
+
+
+
+user input message:

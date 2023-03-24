@@ -1,0 +1,4 @@
+scipy
+git+https://github.com/openai/whisper.git
+openai
+pycrypto
